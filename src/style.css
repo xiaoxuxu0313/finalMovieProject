@@ -1,0 +1,248 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  margin: 0px;
+}
+
+h1 {
+  font-size: xxx-large;
+}
+
+.logo {
+  width: 100px;
+}
+
+.headBar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #01b4e4;
+  padding: 10px 10px 10px 30px;
+}
+
+.headBar-left,
+.headBar-right {
+  display: flex;
+}
+
+.tab {
+  background-color: #01b4e4;
+  color: white;
+  font-size: x-large;
+  border: #01b4e4;
+  padding: 20px;
+}
+
+.active::after,
+.tab:hover::after {
+  content: '';
+  width: 100%;
+  height: 5px;
+  display: block;
+  background-color: white;
+}
+
+.pageBar-container {
+  display: flex;
+  padding-top: 35px;
+  width: 100vw;
+  justify-content: center;
+}
+
+.pageBar {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.prevAndNext-button {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: #01b4e4;
+  border: 1px solid #01b4e4;
+  background-color: white;
+}
+
+.showPage {
+  font-size: medium;
+}
+
+.category-container {
+  position: absolute;
+  top: 110px;
+  right: 35px;
+}
+
+.categoryText,
+.loginInputName {
+  font-size: smaller;
+  padding-right: 2px;
+  padding-bottom: 4px;
+  color: grey;
+}
+
+.categorySelect {
+  height: 2rem;
+  font-size: medium;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+  padding: 35px;
+}
+
+.movieCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.1);
+  /* box-shadow: x 偏移量 | y 偏移量 | 阴影模糊半径 | 阴影扩散半径 | 阴影颜色 */
+}
+
+.movieTitle {
+  display: flex;
+  justify-content: center;
+  /* text-decoration: none; */
+}
+
+.ratingBar {
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.rating-left,
+.rating-right {
+  display: flex;
+}
+
+.detailPage-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 30px 12%;
+  /* border: 1px solid black; */
+}
+/*
+.detailPage-container .image {
+  width: 33.3%;
+  border: 1px solid red;
+  flex-shrink: 0;
+}
+*/
+.movieCardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detailPage-container .right-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 30px;
+  width: 100%;
+  /* border: 1px solid black;*/
+}
+/*
+.detailPage-container .movieCardDetailsImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+*/
+
+.section-title {
+  margin: 0.8rem 0;
+  font-size: large;
+}
+
+.overview {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.genres {
+  display: flex;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.genre {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: white;
+  background-color: #90cea1;
+}
+
+.ratingBar {
+  align-items: center;
+}
+
+.icon-star {
+  font-size: x-large;
+  color: #f5c518;
+}
+
+.averageRating {
+  font-size: large;
+}
+
+.icon-heart {
+  font-size: x-large;
+}
+
+.rateOption {
+  height: 2rem;
+}
+
+.rateIt {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: 1px solid gray;
+  color: black;
+  background-color: white;
+}
+
+.companyList {
+  display: flex;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.company {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.companyImg {
+  width: 80px;
+  object-fit: contain;
+}
+
+.loginContainer {
+  display: flex;
+  justify-content: center;
+}
+.loginTextContainer {
+  text-align: center;
+}
+.loginContainer .mainBody {
+  display: flex;
+  width: 500px;
+  flex-direction: column;
+}
+.loginContainer .input {
+  height: 25px;
+}
+.loginContainer .submitButton {
+  height: 35px;
+  color: white;
+  background-color: #01b4e4;
+  border: #01b4e4;
+  border-radius: 5px;
+}
