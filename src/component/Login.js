@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import { API_KEY } from 'react';
+import { API_KEY } from '../api';
 import Context from './Context';
 import { useNavigate } from 'react-router-dom';
 
