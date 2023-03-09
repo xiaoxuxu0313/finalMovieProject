@@ -1,23 +1,34 @@
 import React, { useContext, useState } from 'react';
+//import axios from 'axios';
+import { API_KEY } from 'react';
+import Context from './Context';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-  // const { user, setUser } = useContext(React.createContext({}));
+  // const { user, setUser } = useContext(Context);
   // const { setFavoriteList } = useContext(React.createContext({}));
   // const { setRatedList } = useContext(React.createContext({}));
-  const [loading, setLoading] = useState(false);
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [loggedin, setLoggedin] = useState(false);
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
-    //console.log(e.target.value);
+    console.log(e.target.value);
     setUsernameInput(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
-    //console.log(e.target.value);
+    console.log(e.target.value);
     setPasswordInput(e.target.value);
     //console.log(passwordInput);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await login(usernameInput, passwordInput);
   };
 
   const login = async (username, password) => {
@@ -25,34 +36,80 @@ export default function Login() {
       setLoading(true);
       const {
         data: { request_token },
-      } = await client.get(`/authentication/token/new`);
-      await client.post('/authentication/token/validate_with_login', {
-        username,
-        password,
-        request_token,
-      });
+      } = await axios.get(
+        `https://api.themoviedb.org/3/authentication/token/new?api_key=${API_KEY}`
+      );
+      await axios.post(
+        `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${API_KEY}`,
+        {
+          username,
+          password,
+          request_token,
+        }
+      );
       const {
         data: { session_id },
-      } = await client.post(`/authentication/session/new`, { request_token });
-      client.defaults.params = { ...client.defaults.params, session_id };
-      const { data } = await client.get('/account');
+      } = await axios.post(
+        `https://api.themoviedb.org/3/authentication/session/new?api_key=${API_KEY}`,
+        { request_token }
+      );
+      axios.defaults.params = { ...axios.defaults.params, session_id };
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/3/account?api_key=${API_KEY}`
+      );
       const userData = {
         username,
-        accountId: data.id,
+        accoundId: data.id,
         sessionId: session_id,
         requestToken: request_token,
       };
-      localStorage.setItem('user', JSON.stringify(userData));
+      s;
       setUser(userData);
+      setLoggedin(true);
       setLoading(false);
-      //console.log(userData);
     } catch (e) {
       setLoading(false);
-      throw e;
+      alert('Failed to login');
     }
   };
 
-  return (
+  // const login = async (username, password) => {
+  //   try {
+  //     setLoading(true);
+  //     const {
+  //       data: { request_token },
+  //     } = await client.get(`/authentication/token/new`);
+  //     await client.post('/authentication/token/validate_with_login', {
+  //       username,
+  //       password,
+  //       request_token,
+  //     });
+  //     const {
+  //       data: { session_id },
+  //     } = await client.post(`/authentication/session/new`, { request_token });
+  //     client.defaults.params = { ...client.defaults.params, session_id };
+  //     const { data } = await client.get('/account');
+  //     const userData = {
+  //       username,
+  //       accountId: data.id,
+  //       sessionId: session_id,
+  //       requestToken: request_token,
+  //     };
+  //     localStorage.setItem('user', JSON.stringify(userData));
+  //     setUser(userData);
+  //     setLoading(false);
+  //     //console.log(userData);
+  //   } catch (e) {
+  //     setLoading(false);
+  //     throw e;
+  //   }
+  // };
+
+  return loggedin ? (
+    navigate('/HOME')
+  ) : loading ? (
+    <div>Loading...</div>
+  ) : (
     <div className="loginContainer">
       <div className="mainBody">
         <br />
@@ -84,12 +141,7 @@ export default function Login() {
           onChange={handlePasswordChange}
         />
         <br />
-        <button
-          className="submitButton"
-          onClick={() => {
-            login(usernameInput, passwordInput);
-          }}
-        >
+        <button className="submitButton" onClick={handleSubmit}>
           SUBMIT
         </button>
       </div>
